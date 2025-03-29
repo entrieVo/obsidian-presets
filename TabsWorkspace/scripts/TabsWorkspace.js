@@ -7,7 +7,8 @@ class TabsWorkspace {
 		if (
 			activeTab === null ||
 			activeTab === undefined ||
-			activeTab > tabs.length - 1
+			activeTab > tabs.length - 1 ||
+			activeTab < 0
 		) {
 			this.#addMeta(app, "activeTab", 0, dv);
 			activeTab = 0;
@@ -33,7 +34,7 @@ class TabsWorkspace {
 
 			if (c.startsWith("%%")) isContent = !isContent;
 
-			if (c.match(regex)) {
+			if (c.match(regex) && isContent) {
 				label = c.replace(regex, "");
 				tabs.push({ label: label, section: "" });
 				continue;
